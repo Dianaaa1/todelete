@@ -12,7 +12,7 @@ function App() {
       headers:{
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
       },
-      body: qs.stringify({user: username, password: password}),
+      body: qs.stringify({username: username, password: password}),
     }).then(response => {
       console.log("res  ", response)
       return response.clone().text()
