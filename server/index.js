@@ -12,7 +12,7 @@ app.use((req, res, next) => {
 });
 app.post("/login", (req, res) => {
   console.log("Body", req.body);
-  res.send(`${req.body.user}`);
+  res.send(`Hello ${req.body.user}, your password is: ${req.body.password}`);
 });
 
 app.listen(3000, () => {

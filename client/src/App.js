@@ -9,17 +9,22 @@ function App() {
     e.preventDefault();
     const response = await fetch("http://localhost:3000/login",{
       method: "POST",
-      mode: 'no-cors',
       headers:{
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
       },
       body: qs.stringify({user: username, password: password}),
-    }).then((resp) => resp.json())
-    .then(function(response) {
-        console.info('fetch()', response);
-        return response;
-    });
-    console.log("response1 = ", response);
+    }).then(response => {
+      console.log("res  ", response)
+      return response.clone().text()
+    })
+    .then((response) => {
+      console.log("response1 = ", response);
+      setMessage(response)
+    })
+    .catch((error) => {
+      Promise.reject(error)
+    })
+    
   }
   return (
     <div className="App">
