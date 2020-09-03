@@ -13,8 +13,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 
 require('./auth'); 
-app.use(passport.initialize());
-app.use(passport.session());
 app.post('/login',
   passport.authenticate('local'),
   function(req, res) {
