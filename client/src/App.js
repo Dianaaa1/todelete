@@ -1,43 +1,27 @@
 import React, { useState } from 'react';
-import qs from 'qs'
+import Login from './Login';
+import Home from './Home';
+import Register from './Register';
+import { BrowserRouter, Route, Redirect, Link } from "react-router-dom";
 
 function App() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const handleSubmit= async e => {
-    e.preventDefault();
-    const response = await fetch("http://localhost:3000/login",{
-      method: "POST",
-      headers:{
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-      },
-      body: qs.stringify({username: username, password: password}),
-    }).then(response => {
-      console.log("res  ", response)
-      return response.clone().text()
-    })
-    .then((response) => {
-      console.log("response1 = ", response);
-      setMessage(response)
-    })
-    .catch((error) => {
-      Promise.reject(error)
-    })
-    
-  }
+
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit}>
-      Username: <input type="text" name="username" value={username} onChange={e => setUsername(e.target.value)}/>
-      Password: <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)}/>
-      <button type="submit">Отправить</button>
-  <div>{message}</div>
-      </form>
-    </div>
+    <BrowserRouter>
+      <Route exact path="/">
+        <Login />
+        <Link to="/register">Зарегистрироваться</Link>
+      </Route>
+      <Route path="/home">
+        <Home />
+      </Route>
+      <Route path="/register">
+        <Register />
+      </Route>
+      <Route path="/login" render={() => <Login />} />
+    </BrowserRouter>
   );
 }
 
 export default App;
 
- 

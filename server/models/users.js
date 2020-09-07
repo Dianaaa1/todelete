@@ -29,7 +29,7 @@ userSchema.plugin(passportLocalMongoose);
 // User Schema model
 const User = new mongoose.model('User', userSchema, 'User');
 
-//const user = new User({ username: "nick", password: "nick18"});
-User.register({username:'zzzz', active: false},'zzzz111111111111111');
+/*const newUser = new User({ username: "test" });
+User.register(newUser, "test", (err, user) => console.log('err ', err));*/
 
 module.exports = User;
